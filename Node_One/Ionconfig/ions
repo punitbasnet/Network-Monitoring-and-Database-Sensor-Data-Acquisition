@@ -1,0 +1,18 @@
+#!/bin/bash
+# shell script to get ION node running
+#killm
+#sleep 2
+#ionstop
+#sleep 5
+pwd
+ionadmin        ipn.ionrc
+sleep 1
+ionsecadmin     ipn.ionsecrc
+sleep 1
+bpadmin         ipn.bprc
+sleep 1
+bpecho ipn:12.1 &
+cfdpadmin       ipn.cfdprc
+sleep 1
+
+

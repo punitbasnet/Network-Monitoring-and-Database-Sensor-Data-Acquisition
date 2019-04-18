@@ -1,0 +1,12 @@
+# Initialization command (command 1). 
+1 20 ipn.ionconfig
+e 1
+v
+# start ion node
+
+s
+
+m horizon +0
+
+#r 'ionadmin global.ionrc'
+

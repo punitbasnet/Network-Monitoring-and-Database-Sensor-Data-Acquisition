@@ -1,0 +1,10 @@
+[Unit]
+Description=For sensor data acquisition
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 -u deployment.py
+WorkingDirectory=/home/pi/serial/testcode/deployment
+
+[Install]
+WantedBy=default.target

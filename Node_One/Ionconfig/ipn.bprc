@@ -1,0 +1,58 @@
+# Initialization command (command 1).
+1
+
+#w abc!
+# Add an EID scheme. Note use of 'bssfw' in place of 'ipnfw'
+
+a scheme ipn 'ipnfw' 'ipnadminep'
+
+# Add endpoints.
+#a endpoint ipn:12.0 
+
+a endpoint ipn:12.1 x  
+a endpoint ipn:12.2 x
+a endpoint ipn:12.3 x
+a endpoint ipn:12.55 x
+a endpoint ipn:12.64 x
+a endpoint ipn:12.65 x
+
+
+
+#-----------------------------------------------------------------
+# Add a protocol for external nodes.
+#-----------------------------------------------------------------
+# Estimate transmission capacity assuming 1400 bytes of each frame 
+# for payload, and 100 bytes for overhead.
+
+a protocol tcp 1400 100
+
+#-----------------------------------------------------------------
+# Add an induct. (listen)
+#-----------------------------------------------------------------
+
+a induct tcp 0.0.0.0:4556 tcpcli
+
+#-----------------------------------------------------------------
+# Add outducts.
+#-----------------------------------------------------------------
+
+# TCP outduct to the server
+#-----------------------------------------------------------------
+
+
+a outduct tcp 132.235.67.12:4556 ''
+
+	
+#-----------------------------------------------------------------
+
+a plan ipn:20.0
+a planduct ipn:20.0 tcp 132.235.67.12:4556
+a plan ipn:27.0
+g plan ipn:27.0 ipn:20.0
+
+w 0
+
+# Start all declared schemes and protocols on the local node
+s
+
+

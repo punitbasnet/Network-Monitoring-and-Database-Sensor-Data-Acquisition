@@ -1,0 +1,12 @@
+[Unit]
+Description= -------- EXECUTE FILE TRANSFERS -----------------------------
+
+[Service]
+User=pi
+Group=pi
+ExecStart=/bin/bash startSending.sh   
+WorkingDirectory=/home/pi/ionconfig
+
+[Install]
+WantedBy=default.target
+

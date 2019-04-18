@@ -1,0 +1,12 @@
+[Unit]
+Description=<<<<<<<<<<<<<<<<<<<<<<<<<FOR TIME RETENTION>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+After=network.target
+
+[Service]
+User=pi
+Group=pi
+ExecStart=/home/pi/deployment/rasclock.sh
+
+[Install]
+WantedBy=default.target
+

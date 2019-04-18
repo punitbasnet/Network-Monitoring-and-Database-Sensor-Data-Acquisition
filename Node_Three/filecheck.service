@@ -1,0 +1,12 @@
+[Unit]
+Description= -------- EXECUTE FILE TRANSFERS -----------------------------
+
+[Service]
+User=sysop
+Group=sysop
+ExecStart=/bin/bash zabbix.sh    
+WorkingDirectory=/home/sysop/filehandling/
+
+[Install]
+WantedBy=default.target
+

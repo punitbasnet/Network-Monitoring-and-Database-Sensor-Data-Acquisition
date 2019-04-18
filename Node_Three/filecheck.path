@@ -1,0 +1,12 @@
+[Unit]
+Description= --------Check for files -----------------------------
+
+[Path]
+PathExistsGlob=/home/sysop/repository/incoming/hmacreadings*.txt
+
+[Service]
+Restart=always
+RestartSec=300
+
+[Install]
+WantedBy=default.target
