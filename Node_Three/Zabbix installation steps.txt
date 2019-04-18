@@ -1,0 +1,42 @@
+apt update 
+apt-get upgrade
+apt install apache2
+apt install mysql-server
+apt install php php7.2-cli php7.2-mysql php7.2-common php7.2-curl php7.2-json php7.2-cgi libapache2-mod-php7.2 php7.2
+service apache2 start
+wget https://repo.zabbix.com/zabbix/4.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_4.0-2+bionic_all.deb
+dpkg -i zabbix-release_4.0-2+bionic_all.deb
+apt update
+apt install zabbix-server-mysql zabbix-frontend-php
+mysql_secure_installation
+mysql -u root -p
+
+mysql > create database zabbix character set utf8 collate utf8_bin;
+mysql > grant all privileges on zabbix.* to zabbix@localhost identified by 'password';
+mysql > flush privileges;
+mysql > cd database/mysql
+> mysql -uzabbix -pCreek^559 zabbix < schema.sql
+> mysql -uzabbix -pCreek^559 zabbix < images.sql
+> mysql -uzabbix -pCreek^559 zabbix < data.sql
+\q
+
+cd /usr/share/doc/zabbix-server-mysql/
+zcat create.sql.gz | mysql -uroot zabbix -p
+nano /etc/zabbix/zabbix_server.conf
+nano /etc/php/7.2/apache2/php.ini
+nano /etc/apache2/conf-enabled/zabbix.conf
+service apache2 restart
+service zabbix-server start
+
+---------- Adding a host ------------
+apt install zabbix-agent
+sh -c "openssl rand -hex 32 > /etc/zabbix/zabbix_agentd.psk"
+cat /etc/zabbix/zabbix_agentd.psk
+nano /etc/zabbix/zabbix_agentd.conf
+
+Server=zabbix_server_IP
+ServerActive=zabbix_server_IP
+TLSConnect=psk
+TLSAccept=psk
+TLSPSKIdentity=PKI 001
+TLSPSKFile=/etc/zabbix/zabbix_agentd.psk
